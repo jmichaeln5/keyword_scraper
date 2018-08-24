@@ -4,6 +4,10 @@ class SitesController < ApplicationController
   # GET /sites
   # GET /sites.json
   def index
+    require 'rubygems'
+    require 'nokogiri'
+    require 'open-uri'
+
     @sites = Site.all
   end
 
@@ -17,7 +21,6 @@ class SitesController < ApplicationController
     @site_link = @site.link.to_s
     @site_open = Nokogiri::HTML(open(@site_link))
     @official_title = @site_open.at_css("title").text
-
   end
 
   # GET /sites/new

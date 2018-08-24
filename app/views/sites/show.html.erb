@@ -1,7 +1,14 @@
 <p id="notice"><%= notice %></p>
 
 
-<!-- <%= @site_open %> -->
+<!-- <%= @site_open.to_s %> -->
+<%= @site_open.at_css("h3").text %>
+<br>
+<br>
+<%= @site_open.at_css("h3").text.length %>
+<br>
+<hr>
+<br>
 
 <% if @site.title.blank? %>
   <p>
