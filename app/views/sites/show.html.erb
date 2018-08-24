@@ -2,35 +2,40 @@
 
 
 <!-- <%= @site_open.to_s %> -->
-<%= @site_open.at_css("h3").text %>
+<!-- <%= @site_open.at_css("h3").text %>
 <br>
 <br>
 <%= @site_open.at_css("h3").text.length %>
 <br>
 <hr>
-<br>
+<br> -->
+
+<h1> Page </h1>
 
 <% if @site.title.blank? %>
   <p>
-    <strong> Title: </strong>
-    <a href="<%= @site.link %>" target="_blank"> <%= @official_title %></a>
+<h5>
+    <a href="<%= @site.link %>" target="_blank"> <%= @official_title %>
+    </h5></a>
   </p>
 <% else %>
   <p>
-    <strong> Title: </strong>
+<h5>
     <a href="<%= @site.link %>" target="_blank"> <%= @site.title %></a>
   </p>
+</h5>
 <% end %>
 
 
 
 <!-- <%= @official_title %> -->
 
-
-<p>
-  <strong>Link:</strong>
-  <a href="<%= @site.link %>" target="_blank"> <%= @site.link %></a>
-</p>
+<h6>
+  <p>
+    <strong>Link:</strong>
+    <a href="<%= @site.link %>" target="_blank"> <%= @site.link %></a>
+  </p>
+</h6>
 
 <br>
 <br>
