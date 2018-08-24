@@ -16,20 +16,16 @@
 
 
 <!-- Gets Scraped Site title -->
-      <h5>
+      <h5> Title:
         <% if site.title.blank? %>
-          <p>
            <%= link_to "#{@official_title}", site  %>
-          </p>
         <% else %>
-          <p>
             <%= link_to "#{site.title}", site  %>
-          </p>
         <% end %>
       </h5>
 <!-- Gets site link -->
       <h6>
-        <a href="<%= site.link %>" target="_blank"> <%= site.link[8..40] %>......</a>
+        Link: <a href="<%= site.link %>" target="_blank"> <%= site.link[8..40] %>......</a>
       </h6>
           <%= link_to 'Show', site %>  |
           <%= link_to 'Edit', edit_site_path(site) %> |
