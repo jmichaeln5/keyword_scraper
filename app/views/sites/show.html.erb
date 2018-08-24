@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+
+<!-- <%= @site_open %> -->
+
+<% if @site.title.blank? %>
+  <p>
+    <strong> Title: </strong>
+    <a href="<%= @site.link %>" target="_blank"> <%= @official_title %></a>
+  </p>
+<% else %>
+  <p>
+    <strong> Title: </strong>
+    <a href="<%= @site.link %>" target="_blank"> <%= @site.title %></a>
+  </p>
+<% end %>
+
+
+
+<!-- <%= @official_title %> -->
+
+
+<p>
+  <strong>Link:</strong>
+  <a href="<%= @site.link %>" target="_blank"> <%= @site.link %></a>
+</p>
+
+<br>
+<br>
+
+<%= link_to 'Edit', edit_site_path(@site) %> |
+<%= link_to 'Back', sites_path %>
