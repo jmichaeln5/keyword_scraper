@@ -19,8 +19,10 @@ class SitesController < ApplicationController
     require 'open-uri'
 
     @site_link = @site.link.to_s
-    @site_open = Nokogiri::HTML(open(@site_link))
-    @official_title = @site_open.at_css("title").text
+    @html_doc = Nokogiri::HTML(open(@site_link))
+    @official_title = @html_doc.at_css("title").text
+    @site_element = @site.element
+    @all_elements = @html_doc.search("#{@site.element}")
   end
 
   # GET /sites/new
@@ -80,6 +82,6 @@ class SitesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def site_params
-      params.require(:site).permit(:link, :title)
+      params.require(:site).permit(:link, :title, :element)
     end
 end

@@ -3,7 +3,7 @@
 <h1>Sites</h1>
 
 <br>
-<%= link_to 'New Site', new_site_path, class:"btn btn-primary btn-block" %>
+  <%= link_to 'New Site', new_site_path, class:"btn btn-primary btn-block" %>
 <br>
 
 <hr>
@@ -13,14 +13,25 @@
       <% @site_link = site.link.to_s %>
       <% @site_open = Nokogiri::HTML(open(@site_link)) %>
       <% @official_title = @site_open.at_css("title").text %>
-
-
 <!-- Gets Scraped Site title -->
       <h5> Title:
-        <% if site.title.blank? %>
+
+        <% if site.title.blank? && @official_title.blank? %>
+
+          <%= link_to "No Title Availble", site  %>
+
+        <% elsif @official_title.blank?  %>
+
+           <%= link_to "#{site.title}", site  %>
+
+       <% elsif site.title.blank? %>
+
            <%= link_to "#{@official_title}", site  %>
-        <% else %>
-            <%= link_to "#{site.title}", site  %>
+
+       <% else %>
+
+       <%= link_to "No Title Availble", site  %>
+
         <% end %>
       </h5>
 <!-- Gets site link -->

@@ -16,10 +16,15 @@
     <%= form.text_field :link, id: :site_link %>
   </div>
 
+  <div class="field">
+    <%= form.label :element, "Select Element:" %>
+    <%= form.select :element, [ 'header', 'body', 'div', 'p', 'a', 'ul', 'li', 'img','h1', 'h2', 'h3', 'h4', 'h5', 'h6'], id: :site_element %> element
+  </div>
+
   <hr>
-    <h4>Optional </h4>
+    <h4>Optional Title </h4>
     <div class="field">
-      <%= form.label :title %>
+      <%= form.label :title, 'Your Title:' %>
       <%= form.text_field :title, id: :site_title %>
     </div>
   <hr>
