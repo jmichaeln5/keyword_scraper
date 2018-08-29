@@ -20,6 +20,7 @@ class SitesController < ApplicationController
 
     @site_link = @site.link.to_s
     @html_doc = Nokogiri::HTML(open(@site_link))
+
     @official_title = @html_doc.at_css("title").text
     @site_element = @site.element
     @all_elements = @html_doc.search("#{@site.element}")
