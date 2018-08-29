@@ -5,52 +5,6 @@
 
 <h1> Page </h1>
 
-<!-- Logic Check for elsif statement below -->
-
-        <!-- <%= @official_title.blank? %>
-        <%= @site.title.blank? %> -->
-
-<!-- Logic Check for elsif statement below -->
-
-
-
-<!-- <% if @official_title.blank? && @site.title.blank? %>
-
-    <h5>
-        Title: <a href="<%= @site.link %>" target="_blank">
-          No Title Availble
-        </a>
-    </h5>
-
-<% elsif @site.title.blank? %>
-
-    <h5>
-        Title: <a href="<%= @site.link %>" target="_blank">
-          <%= "#{@official_title}"%>
-        </a>
-    </h5>
-
-<% elsif @official_title.blank? && @site.title != nil %>
-
-    <h5>
-        Title: <a href="<%= @site.link %>" target="_blank">
-          <%= "#{@site.title}"%>
-        </a>
-    </h5>
-
-<% else %>
-
-<h5>
-    Title: <a href="<%= @site.link %>" target="_blank">
-      No Title Availble
-    </a>
-</h5>
-
-<% end %> -->
-
-
-
-
 <% if @site.title.blank? && @official_title.blank? %>
 
 <h5>
