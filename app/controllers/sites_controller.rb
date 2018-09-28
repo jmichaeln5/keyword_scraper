@@ -2,9 +2,9 @@ class SitesController < ApplicationController
   before_action :set_site, only: [:show, :edit, :update, :destroy]
 
 ### Error page, redirected to when Server Error
-    def error
-        @sites = Site.all
-    end
+  def error
+      @sites = Site.all
+  end
 
   # GET /sites
   # GET /sites.json
@@ -12,24 +12,23 @@ class SitesController < ApplicationController
 
     @sites = Site.all
 
-    require 'rubygems'
-    require 'nokogiri'
-    require 'open-uri'
+    # require 'rubygems'
+    # require 'nokogiri'
+    # require 'open-uri'
 
     begin
 
-    @sites.each do |site|
+      @sites.each do |site|
 
-      @site_link = site.link.to_s
-      @site_open = Nokogiri::HTML(open(@site_link))
-      @official_title = @site_open.at_css("title").text
+        @site_link = site.link.to_s
+        @site_open = Nokogiri::HTML(open(@site_link))
+        @official_title = @site_open.at_css("title").text
 
+        ### Rescues from OpenURI HTTPError(s)
+        rescue OpenURI::HTTPError
+          ###(Specifically wrote rescue block from begin for 900 Server error when trying to scrape LinkedIn Profiles)
 
-      ### Rescues from OpenURI HTTPError(s)
-      rescue OpenURI::HTTPError
-        ###(Specifically wrote rescue block from begin for 900 Server error when trying to scrape LinkedIn Profiles)
-
-      redirect_to error_path and return
+        redirect_to error_path and return
 
       end
     end
@@ -39,27 +38,25 @@ class SitesController < ApplicationController
   # GET /sites/1.json
   def show
 
-    require 'rubygems'
-    require 'nokogiri'
-    require 'open-uri'
+    # require 'rubygems'
+    # require 'nokogiri'
+    # require 'open-uri'
 
     begin
 
-    @site_link = @site.link.to_s
-    @site_element = @site.element
+      @site_link = @site.link.to_s
+      @site_element = @site.element
 
-    @html_doc = Nokogiri::HTML(open(@site_link))
-    @official_title = @html_doc.at_css("title").text
-    @all_elements = @html_doc.search("#{@site.element}")
+      @html_doc = Nokogiri::HTML(open(@site_link))
+      @official_title = @html_doc.at_css("title").text
+      @all_elements = @html_doc.search("#{@site.element}")
 
-    ### Rescues from OpenURI HTTPError(s)
-    rescue OpenURI::HTTPError
-      ###(Specifically wrote rescue block from begin for 900 Server error when trying to scrape LinkedIn Profiles)
+      ### Rescues from OpenURI HTTPError(s)
+      rescue OpenURI::HTTPError
+        ###(Specifically wrote rescue block from begin for 900 Server error when trying to scrape LinkedIn Profiles)
 
-    redirect_to error_path and return
-
+      redirect_to error_path and return
     end
-
   end
 
   # GET /sites/new
