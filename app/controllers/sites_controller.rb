@@ -12,8 +12,12 @@ class SitesController < ApplicationController
 
     @sites = Site.all
 
+    require 'rubygems'
+    require 'nokogiri'
+    require 'open-uri'
+
     begin
-    
+
     @sites.each do |site|
 
       @site_link = site.link.to_s
@@ -34,9 +38,11 @@ class SitesController < ApplicationController
   # GET /sites/1
   # GET /sites/1.json
   def show
-    # require 'rubygems'
-    # require 'nokogiri'
-    # require 'open-uri'
+
+    require 'rubygems'
+    require 'nokogiri'
+    require 'open-uri'
+
     begin
 
     @site_link = @site.link.to_s
