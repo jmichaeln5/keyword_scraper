@@ -1,6 +1,13 @@
 <h1>Editing Site</h1>
 
+
+<%= link_to 'Destroy', @site, method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger" %>
+
+<br>
+<br>
+
 <%= render 'form', site: @site %>
+
 
 <%= link_to 'Show', @site %> |
 <%= link_to 'Back', sites_path %>

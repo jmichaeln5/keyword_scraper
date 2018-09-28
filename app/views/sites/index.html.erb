@@ -8,14 +8,14 @@
 
 <hr>
 
+<!-- Must leave this each loop from controller or breaks -->
     <% @sites.each do |site| %>
+    <% @site_link = site.link.to_s %>
+    <% @site_open = Nokogiri::HTML(open(@site_link)) %>
+    <% @official_title = @site_open.at_css("title").text %>
 
-      <% @site_link = site.link.to_s %>
-      <% @site_open = Nokogiri::HTML(open(@site_link)) %>
-      <% @official_title = @site_open.at_css("title").text %>
-<!-- Gets Scraped Site title -->
+      <!-- Gets Scraped Site title -->
       <h5> Title:
-
         <% if site.title.blank? && @official_title.blank? %>
 
           <%= link_to "No Title Availble", site  %>
@@ -32,9 +32,10 @@
 
        <%= link_to "No Title Availble", site  %>
 
-        <% end %>
+        <% end %>   <!-- End of elsif -->
       </h5>
-<!-- Gets site link -->
+
+      <!-- Gets site link -->
       <h6>
         Link: <a href="<%= site.link %>" target="_blank"> <%= site.link[8..40] %>......</a>
       </h6>
@@ -42,8 +43,7 @@
           <%= link_to 'Edit', edit_site_path(site) %> |
           <%= link_to 'Destroy', site, method: :delete, data: { confirm: 'Are you sure?' } %>
           <hr>
-    <% end %>
-
+    <% end %> <!-- End of do loop -->
 <br>
 
 <%= link_to "Back", :back, class:"btn btn-outline-primary"%>

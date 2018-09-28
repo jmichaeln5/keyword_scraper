@@ -1,29 +1,59 @@
 class SitesController < ApplicationController
   before_action :set_site, only: [:show, :edit, :update, :destroy]
 
+### Error page, redirected to when Server Error
+    def error
+        @sites = Site.all
+    end
+
   # GET /sites
   # GET /sites.json
   def index
-    require 'rubygems'
-    require 'nokogiri'
-    require 'open-uri'
 
     @sites = Site.all
+
+    begin
+    
+    @sites.each do |site|
+
+      @site_link = site.link.to_s
+      @site_open = Nokogiri::HTML(open(@site_link))
+      @official_title = @site_open.at_css("title").text
+
+
+      ### Rescues from OpenURI HTTPError(s)
+      rescue OpenURI::HTTPError
+        ###(Specifically wrote rescue block from begin for 900 Server error when trying to scrape LinkedIn Profiles)
+
+      redirect_to error_path and return
+
+      end
+    end
   end
 
   # GET /sites/1
   # GET /sites/1.json
   def show
-    require 'rubygems'
-    require 'nokogiri'
-    require 'open-uri'
+    # require 'rubygems'
+    # require 'nokogiri'
+    # require 'open-uri'
+    begin
 
     @site_link = @site.link.to_s
-    @html_doc = Nokogiri::HTML(open(@site_link))
-
-    @official_title = @html_doc.at_css("title").text
     @site_element = @site.element
+
+    @html_doc = Nokogiri::HTML(open(@site_link))
+    @official_title = @html_doc.at_css("title").text
     @all_elements = @html_doc.search("#{@site.element}")
+
+    ### Rescues from OpenURI HTTPError(s)
+    rescue OpenURI::HTTPError
+      ###(Specifically wrote rescue block from begin for 900 Server error when trying to scrape LinkedIn Profiles)
+
+    redirect_to error_path and return
+
+    end
+
   end
 
   # GET /sites/new
@@ -38,6 +68,7 @@ class SitesController < ApplicationController
   # POST /sites
   # POST /sites.json
   def create
+
     @site = Site.new(site_params)
 
     respond_to do |format|
@@ -70,12 +101,13 @@ class SitesController < ApplicationController
   def destroy
     @site.destroy
     respond_to do |format|
-      format.html { redirect_to sites_url, notice: 'Site was successfully destroyed.' }
+      format.html { redirect_to sites_url, notice: 'Site was successfully removed.' }
       format.json { head :no_content }
     end
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_site
       @site = Site.find(params[:id])

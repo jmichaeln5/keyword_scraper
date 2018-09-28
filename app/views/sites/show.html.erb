@@ -3,6 +3,7 @@
 </font>
 
 
+
 <h1> Page </h1>
 
 <% if @site.title.blank? && @official_title.blank? %>
@@ -39,14 +40,6 @@
 
 <% end %>
 
-
-
-
-
-
-
-
-
 <h6>
   <p>
     <strong>Link:</strong>
@@ -55,9 +48,6 @@
 </h6>
 
 <hr>
-
-
-
 
 <% if @site.element.empty? != true %>
   <h6>
@@ -71,7 +61,6 @@
       <strong>Number of Element Results:</strong>
       <%= @all_elements.to_a.count %>
 
-
       <br>
       <br>
       <%= link_to 'Edit Selected Element', edit_site_path(@site), class:"btn btn-outline-secondary" %>
@@ -79,7 +68,6 @@
       <br>
       <hr>
 
-      <%# if  @site_element == nil %>
       <% if @all_elements.to_a.count < 1 %>
 
           <h1>
@@ -89,7 +77,6 @@
 
 <!-- Numbers each elment counted on page -->
       <% element_counter = 1 %>
-<!-- Numbers each elment counted on page -->
 
           <% @all_elements.each do |pick| %>
 
@@ -116,15 +103,15 @@
 
 
 <% puts "\n*****************" %>
-<% puts "*****************" %>
-<% puts "*****************" %>
+<% puts "*****************
+
+" %>
 
 <!-- <%= @html_doc.class %> -->
-<!-- <% @all_elements %> -->
+<% puts @all_elements %>
 
 
 <% puts "\n*****************" %>
-<% puts "*****************" %>
 <% puts "*****************
 
 " %>
