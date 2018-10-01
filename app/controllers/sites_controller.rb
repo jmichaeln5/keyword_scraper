@@ -12,9 +12,9 @@ class SitesController < ApplicationController
 
     @sites = Site.all
 
-    # require 'rubygems'
-    # require 'nokogiri'
-    # require 'open-uri'
+    require 'rubygems'
+    require 'nokogiri'
+    require 'open-uri'
 
     begin
 
@@ -38,9 +38,9 @@ class SitesController < ApplicationController
   # GET /sites/1.json
   def show
 
-    # require 'rubygems'
-    # require 'nokogiri'
-    # require 'open-uri'
+    require 'rubygems'
+    require 'nokogiri'
+    require 'open-uri'
 
     begin
 
@@ -53,7 +53,7 @@ class SitesController < ApplicationController
 
       ### Rescues from OpenURI HTTPError(s)
       rescue OpenURI::HTTPError
-        ###(Specifically wrote rescue block from begin for 900 Server error when trying to scrape LinkedIn Profiles)
+        ###(Specifically wrote rescue block from begin for 900 Server error when trying to scrape LinkedIn Profiles but, rescues all server errors)
 
       redirect_to error_path and return
     end
