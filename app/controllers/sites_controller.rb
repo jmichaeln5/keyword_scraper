@@ -1,5 +1,6 @@
 class SitesController < ApplicationController
   before_action :set_site, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
 ### Error page, redirected to when Server Error
   def error
@@ -12,6 +13,7 @@ class SitesController < ApplicationController
 
     @sites = Site.all
 
+    ### Necessary to require for Heroku for view or WILL error out
     require 'rubygems'
     require 'nokogiri'
     require 'open-uri'
@@ -38,6 +40,7 @@ class SitesController < ApplicationController
   # GET /sites/1.json
   def show
 
+    ### Necessary to require for Heroku for view or WILL error out
     require 'rubygems'
     require 'nokogiri'
     require 'open-uri'
