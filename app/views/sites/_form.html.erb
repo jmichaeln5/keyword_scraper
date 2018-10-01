@@ -1,5 +1,7 @@
-<%= form_with(model: site, local: true) do |form| %>
-  <% if site.errors.any? %>
+<hr>
+<%= form_with(model: @site, local: true) do |form| %>
+
+  <% if @site.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(site.errors.count, "error") %> prohibited this site from being saved:</h2>
 
@@ -10,6 +12,15 @@
       </ul>
     </div>
   <% end %>
+
+  <!-- <div>
+    <%= "User ID" %>
+    <br>
+    <%= current_user.id %>
+    <br>
+    <% form.label :user_id %>
+    <% form.text_area :user_id, id: :current_user_id %>
+  </div> -->
 
   <div class="field">
     <%= form.label :link %>

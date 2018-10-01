@@ -2,16 +2,21 @@ class SitesController < ApplicationController
   before_action :set_site, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
 
-### Error page, redirected to when Server Error
+  ### Error page, redirected to when Server Error
   def error
-      @sites = Site.all
+      # @sites = Site.all
+      @user = current_user
+      @sites = Site.where(user_id: @user).order("created_at ASC")
+
   end
 
   # GET /sites
   # GET /sites.json
   def index
 
-    @sites = Site.all
+    @user = current_user
+    @sites = Site.where(user_id: @user).order("created_at DESC")
+    # @sites = Site.all
 
     ### Necessary to require for Heroku for view or WILL error out
     require 'rubygems'
@@ -40,6 +45,9 @@ class SitesController < ApplicationController
   # GET /sites/1.json
   def show
 
+    @user = current_user
+    @site = Site.find(params[:id])
+
     ### Necessary to require for Heroku for view or WILL error out
     require 'rubygems'
     require 'nokogiri'
@@ -64,7 +72,8 @@ class SitesController < ApplicationController
 
   # GET /sites/new
   def new
-    @site = Site.new
+    @user = current_user
+    @site = @user.sites.build
   end
 
   # GET /sites/1/edit
@@ -75,7 +84,8 @@ class SitesController < ApplicationController
   # POST /sites.json
   def create
 
-    @site = Site.new(site_params)
+    # @site = Site.new(site_params)
+    @site = current_user.sites.build(site_params)
 
     respond_to do |format|
       if @site.save
@@ -121,6 +131,6 @@ class SitesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def site_params
-      params.require(:site).permit(:link, :title, :element)
+      params.require(:site).permit(:link, :title, :element, :user_id)
     end
 end

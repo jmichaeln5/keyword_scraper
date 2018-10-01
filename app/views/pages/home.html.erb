@@ -1,7 +1,17 @@
 <main role="main" class="container">
+
+  <% if user_signed_in?  %>
+    <h1> Welcome <%= current_user.email %></h1>
+  <% end %>
+
   <div class="jumbotron">
     <h1>Element Scraper</h1>
-    <p class="lead"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus tempore soluta fugiat sint ad? Autem facere placeat ipsa hic, provident earum eaque omnis dolorum quam, culpa dolor. Error ipsa dolore cum provident facere laboriosam dolor in quasi adipisci nemo excepturi quis ratione maiores, quia quas, magni cupiditate laborum nesciunt, atque. </p>
-    <a class="btn btn-lg btn-primary" href="#" role="button">Click Here to Sign Up &raquo;</a>
+
+    <p class="lead"> This Application is a Web Scraping tool made to help you better examine the elements that make up your favorite webpages. Keep in mind not all pages support web scraping, so please, respect the rules of the domain owners. </p>
+
+    <% if current_user == nil  %>
+      <%= link_to 'Click Here to Sign Up', new_user_registration_path, class:"btn btn-primary btn-lg " %>
+    <% end %>
+
   </div>
 </main>

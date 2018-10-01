@@ -26,14 +26,18 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
                   <div class="navbar-nav">
 
                     <% if user_signed_in?  %>
 
-                      <%= link_to "Welcome #{current_user.email}", root_url, class:"nav-item nav-link" %>
-                      <%= link_to 'My Profile', root_url, class:"nav-item nav-link" %>
-                      <%= link_to 'Sites', sites_path, class:"nav-item nav-link" %>
-                      <%= link_to 'Logout', destroy_user_session_path, method: :delete, class:"nav-item nav-link" %> 
+                      <%= link_to "Welcome #{current_user.email}", user_sites_path(current_user), class:"nav-item nav-link" %>
+
+                      <%=link_to 'My Profile', user_sites_path(current_user), class:"nav-item nav-link" %>
+
+                      <!-- <%=link_to 'Add Site', new_user_site_path(current_user), class:"nav-item nav-link"  %> -->
+
+                      <%= link_to 'Logout', destroy_user_session_path, method: :delete, class:"nav-item nav-link" %>
 
                     <% else  %>
 
