@@ -3,7 +3,6 @@
 <br>
   <%= link_to 'New Site', new_user_site_path(current_user), class:"btn btn-primary btn-block btn-lg" %>
 <br>
-
 <hr>
 
 <!-- Must leave this each loop from controller or breaks -->
@@ -15,24 +14,15 @@
       <!-- Gets Scraped Site title -->
       <h5> Title:
         <% if site.title.blank? && @official_title.blank? %>
-
           <%= link_to "No Title Availble", site  %>
-
         <% elsif @official_title.blank?  %>
-
            <%= link_to "#{site.title}", site  %>
-
        <% elsif site.title.blank? %>
-
            <%= link_to "#{@official_title}", site  %>
-
        <% else %>
-
        <%= link_to "No Title Availble", site  %>
-
         <% end %>   <!-- End of elsif -->
       </h5>
-
       <!-- Gets site link -->
       <h6>
         Link: <a href="<%= site.link %>" target="_blank"> <%= site.link[8..40] %>......</a>
@@ -40,7 +30,7 @@
           <%= link_to 'Show', site %>  |
           <%= link_to 'Edit', edit_site_path(site) %> |
           <%= link_to 'Destroy', site, method: :delete, data: { confirm: 'Are you sure?' } %>
-          <hr>
+<hr>
     <% end %> <!-- End of do loop -->
 <br>
 

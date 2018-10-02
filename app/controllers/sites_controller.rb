@@ -54,7 +54,7 @@ class SitesController < ApplicationController
 
     @site_link = @site.link.to_s
 
-    if @site_link.exclude? "www."
+    if @site_link.exclude? "http"
         redirect_to error_path and return
     end
 
