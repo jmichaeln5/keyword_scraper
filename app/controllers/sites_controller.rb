@@ -4,11 +4,10 @@ class SitesController < ApplicationController
 
   ### Error page, redirected to when Server Error
   def error
-      # @sites = Site.all
       @user = current_user
       @sites = Site.where(user_id: @user).order("created_at ASC")
-
   end
+
 
   # GET /sites
   # GET /sites.json
@@ -16,7 +15,6 @@ class SitesController < ApplicationController
 
     @user = current_user
     @sites = Site.where(user_id: @user).order("created_at DESC")
-    # @sites = Site.all
 
     ### Necessary to require for Heroku for view or WILL error out
     require 'rubygems'
@@ -24,19 +22,21 @@ class SitesController < ApplicationController
     require 'open-uri'
 
     begin
-
       @sites.each do |site|
 
         @site_link = site.link.to_s
+
+        if @site_link.exclude? "http"
+            redirect_to error_path and return
+        end
+
         @site_open = Nokogiri::HTML(open(@site_link))
         @official_title = @site_open.at_css("title").text
 
         ### Rescues from OpenURI HTTPError(s)
         rescue OpenURI::HTTPError
           ###(Specifically wrote rescue block from begin for 900 Server error when trying to scrape LinkedIn Profiles)
-
         redirect_to error_path and return
-
       end
     end
   end
@@ -53,19 +53,22 @@ class SitesController < ApplicationController
     require 'nokogiri'
     require 'open-uri'
 
-    begin
+    @site_link = @site.link.to_s
 
-      @site_link = @site.link.to_s
+    if @site_link.exclude? "www."
+        redirect_to error_path and return
+    end
+
+    begin
+      # @site_link = @site.link.to_s
       @site_element = @site.element
 
       @html_doc = Nokogiri::HTML(open(@site_link))
       @official_title = @html_doc.at_css("title").text
       @all_elements = @html_doc.search("#{@site.element}")
-
       ### Rescues from OpenURI HTTPError(s)
       rescue OpenURI::HTTPError
         ###(Specifically wrote rescue block from begin for 900 Server error when trying to scrape LinkedIn Profiles but, rescues all server errors)
-
       redirect_to error_path and return
     end
   end

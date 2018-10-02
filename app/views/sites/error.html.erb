@@ -1,4 +1,10 @@
 <h1>Scraping Error</h1>
-<h2>Last site added does not allow scraping.</h2>
+
+<% if @sites.last.link.exclude? "http" %>
+  <h2>Site must include "www.", "http", or "https" in link field.</h2>
+<% else %>
+  <h2>Last site added does not allow scraping.</h2>
+<% end %>
+
 
 <%= link_to 'Press Here To Remove Site From List', @sites.last, method: :delete, class:"btn btn-outline-primary" %>
