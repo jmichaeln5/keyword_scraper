@@ -8,7 +8,6 @@ class SitesController < ApplicationController
       @sites = Site.where(user_id: @user).order("created_at ASC")
   end
 
-
   # GET /sites
   # GET /sites.json
   def index
