@@ -5,37 +5,29 @@
 <h1> Page </h1>
 
 <% if @site.title.blank? && @official_title.blank? %>
-
-<h5>
-    Title: <a href="<%= @site.link %>" target="_blank">
-      No Title Availble
-    </a>
-</h5>
-
+  <h5>
+      Title: <a href="<%= @site.link %>" target="_blank">
+        No Title Availble
+      </a>
+  </h5>
 <% elsif @official_title.blank?  %>
-
     <h5>
         Title: <a href="<%= @site.link %>" target="_blank">
           <%= "#{@site.title}"%>
         </a>
     </h5>
-
 <% elsif @site.title.blank?  %>
-
     <h5>
         Title: <a href="<%= @site.link %>" target="_blank">
           <%= "#{@official_title}"%>
         </a>
     </h5>
-
 <% else %>
-
     <h5>
         Title: <a href="<%= @site.link %>" target="_blank">
           No Title Availble
         </a>
     </h5>
-
 <% end %>
 
 <h6>
@@ -50,10 +42,8 @@
 <% if @site.element.empty? != true %>
   <h6>
     <p>
-
       <strong>Selected Element:</strong>
       <%= @site.element %>
-
       <br>
 
       <strong>Number of Element Results:</strong>
@@ -61,36 +51,31 @@
 
       <br>
       <br>
+
       <%= link_to 'Edit Selected Element', edit_site_path(@site), class:"btn btn-outline-secondary" %>
 
       <br>
       <hr>
 
       <% if @all_elements.to_a.count < 1 %>
-
           <h1>
             <font style="color:red;">  The <%= @site.element %> element is not used on your Webpage </font>
           </h1>
       <% else  %>
+      <% element_counter = 0 %>
+      <% length = @all_elements.length.to_i %>
 
-<!-- Numbers each elment counted on page -->
-      <% element_counter = 1 %>
+        <% @all_elements.each do |element| %>
+          <strong> Element Result: <%= element_counter += 1%> </strong>
 
-          <% @all_elements.each do |pick| %>
+          <br>
+          
+          <%= element %>
 
-              <% until element_counter > @all_elements.to_a.count.to_i %>
+          <br>
+          <hr>
 
-              <strong>
-                Element Result: <%= element_counter %>
-              </strong>
-                  <br>
-                  <%= pick %>
-                  <br>
-                  <hr>
-                  <% element_counter = element_counter +1 %>
-              <% end %>
-          <% end %>
-
+        <% end %>
       <% end  %>
     </p>
   </h6>
@@ -98,20 +83,5 @@
 
 <br>
 
-
-
-<% puts "\n*****************" %>
-<% puts "*****************
-
-" %>
-
-<!-- <%= @html_doc.class %> -->
-<%# puts @all_elements %>
-
-
-<% puts "\n*****************" %>
-<% puts "*****************
-
-" %>
 
 <%= link_to "Back", :back, class:"btn btn-outline-primary"%>

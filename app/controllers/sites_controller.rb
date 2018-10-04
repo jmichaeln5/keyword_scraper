@@ -67,7 +67,7 @@ class SitesController < ApplicationController
       @all_elements = @html_doc.search("#{@site.element}")
       ### Rescues from OpenURI HTTPError(s)
       rescue OpenURI::HTTPError
-        ###(Specifically wrote rescue block from begin for 900 Server error when trying to scrape LinkedIn Profiles but, rescues all server errors)
+
       redirect_to error_path and return
     end
   end
