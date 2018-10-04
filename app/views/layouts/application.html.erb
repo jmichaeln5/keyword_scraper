@@ -31,7 +31,7 @@
 
                     <% if user_signed_in?  %>
 
-                      <%= link_to "Welcome #{current_user.email}", user_sites_path(current_user), class:"nav-item nav-link" %>
+                      <%= link_to "Hello #{current_user.email}", user_sites_path(current_user), class:"nav-item nav-link" %>
 
                       <%=link_to 'My Profile', user_sites_path(current_user), class:"nav-item nav-link" %>
 
