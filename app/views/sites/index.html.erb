@@ -1,7 +1,9 @@
 <h1>Sites</h1>
 
 <br>
+
   <%= link_to 'New Site', new_user_site_path(current_user), class:"btn btn-primary btn-block btn-lg" %>
+
 <br>
 <hr>
 
@@ -32,6 +34,7 @@
           <%= link_to 'Destroy', site, method: :delete, data: { confirm: 'Are you sure?' } %>
 <hr>
     <% end %> <!-- End of do loop -->
+
 <br>
 
 <%= link_to "Back", :back, class:"btn btn-outline-primary"%>
