@@ -47,7 +47,7 @@
       <br>
 
       <strong>Number of Element Results:</strong>
-      <%= @all_elements.to_a.count %>
+      <%= @element_results.to_a.count %>
 
       <br>
       <br>
@@ -57,20 +57,31 @@
       <br>
       <hr>
 
-      <% if @all_elements.to_a.count < 1 %>
-          <h1>
-            <font style="color:red;">  The <%= @site.element %> element is not used on your Webpage </font>
-          </h1>
+      <% if @element_results.to_a.count < 1 %>
+        <h1>
+          <font style="color:red;">  The <%= @site.element %> element is not used on your Webpage </font>
+        </h1>
       <% else  %>
-      <% element_counter = 0 %>
-      <% length = @all_elements.length.to_i %>
 
-        <% @all_elements.each do |element| %>
+        <% element_counter = 0 %>
+        <% length = @element_results.length.to_i %>
+
+        <% @element_results.each do |element| %>
           <strong> Element Result: <%= element_counter += 1%> </strong>
 
           <br>
 
           <%= element %>
+<hr>
+          <% element.each do |find| %>
+          <%= find.length %>
+          <br>
+          <hr>
+          <br>
+          <%= find  %>
+            <%# find+=1 %>
+
+          <% end %>
 
           <br>
           <hr>

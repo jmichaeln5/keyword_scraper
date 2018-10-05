@@ -43,15 +43,13 @@ class SitesController < ApplicationController
   # GET /sites/1
   # GET /sites/1.json
   def show
-
-    @user = current_user
-    @site = Site.find(params[:id])
-
     ### Necessary to require for Heroku for view or WILL error out
     require 'rubygems'
     require 'nokogiri'
     require 'open-uri'
 
+    @user = current_user
+    @site = Site.find(params[:id])
     @site_link = @site.link.to_s
 
     if @site_link.exclude? "http"
@@ -64,7 +62,7 @@ class SitesController < ApplicationController
 
       @html_doc = Nokogiri::HTML(open(@site_link))
       @official_title = @html_doc.at_css("title").text
-      @all_elements = @html_doc.search("#{@site.element}")
+      @element_results = @html_doc.search("#{@site.element}")
       ### Rescues from OpenURI HTTPError(s)
       rescue OpenURI::HTTPError
 
@@ -85,8 +83,6 @@ class SitesController < ApplicationController
   # POST /sites
   # POST /sites.json
   def create
-
-    # @site = Site.new(site_params)
     @site = current_user.sites.build(site_params)
 
     respond_to do |format|
